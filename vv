@@ -663,6 +663,17 @@ site_creation_questions() {
 		fi
 	fi
 
+    if [[ -z "$git_repo" && -z "$git_init" ]]; then
+        if [ "$use_defaults" = "false" ]; then
+            prompt "Create as git repo? (y/N)"
+            read -r git_init
+        fi
+        if [ "$use_defaults" = "false" ]; then
+            prompt "Version WordPress core files? (y/N)"
+            read -r git_ignore
+        fi
+    fi
+
 	if [[ -z "$username" ]]; then
 		username="admin"
 	fi

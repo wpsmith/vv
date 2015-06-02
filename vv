@@ -345,6 +345,12 @@ load_default_values() {
 	defaults="$(echo "$defaults" | sed -e 's/^"//'  -e 's/"$//')"
 }
 
+get_config_value() {
+    value="$( getJsonVal "$defaults" $1 )"
+	value="$(echo "$value" | sed -e 's/^"//'  -e 's/"$//')"
+    echo "$value"
+}
+
 get_vvv_path(){
 	if [ ! -z "$force_path" ]; then
 		unset path

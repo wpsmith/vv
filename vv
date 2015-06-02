@@ -345,6 +345,12 @@ load_default_values() {
 	defaults="$(echo "$defaults" | sed -e 's/^"//'  -e 's/"$//')"
 }
 
+get_default_config_value() {
+    value="$( getJsonVal "['defaults']['$1']" < ~/.vv-config )"
+    value="$(echo "$value" | sed -e 's/^"//'  -e 's/"$//')"
+    echo "$value"
+}
+
 get_config_value() {
     value="$( getJsonVal "['$1']" < ~/.vv-config )"
 	value="$( echo "$value" | sed -e 's/^"//'  -e 's/"$//' )"

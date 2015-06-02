@@ -510,7 +510,11 @@ site_creation_questions() {
 	done
 
 	# Get database name
-	db_name=$site
+	if [ -z "$db_name_prefix" ]; then
+        db_name=$site
+    else
+        db_name="$db_name_prefix$site"
+    fi
 
 	# Get web root of site
 	if [ -z "$web_root" ]; then

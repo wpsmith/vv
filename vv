@@ -344,7 +344,7 @@ load_defaults() {
     remove_defaults="$( get_default_config_value 'remove-defaults' )"
     placeholder_content="$( get_default_config_value 'sample-content' )"
     wp_debug="$( get_default_config_value 'debug' )"
-    image_proxy="$( get_default_config_value 'images' )"
+    image_proxy="$( get_default_config_value 'images-proxy' )"
     git_repo="$( get_default_config_value 'git-repo' )"
     git_init="$( get_default_config_value 'git-init' )"
     gitignore="$( get_default_config_value 'gitignore' )"
@@ -356,12 +356,22 @@ load_defaults() {
     db_prefix="$( get_default_config_value 'db-prefix' )"
     if [[ $db_prefix = 'random' ]]; then
         db_prefix_length="$( get_default_config_value 'db-prefix-length' )"
-		db_prefix="$(random_string)"
+		db_prefix="$(random_prefix)"
     else
         if [ -z "$db_prefix" ]; then
             db_prefix="wp_"
         fi
 	fi
+}
+
+random_prefix() {
+    if [ -z "$1" ]; then
+		num="6"
+    else
+        num=$1
+	fi
+    str="$(date | md5sum | head -c $num)_"
+    echo $str
 }
 
 get_default_config_value() {

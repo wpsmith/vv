@@ -334,9 +334,35 @@ load_config_autopdate_config_values() {
 	fi
 }
 
-load_default_values() {
+load_defaults() {
 	defaults="$( getJsonVal "['defaults']" < ~/.vv-config )"
 	defaults="$(echo "$defaults" | sed -e 's/^"//'  -e 's/"$//')"
+
+    #warning "DEBUG: defaults = $defaults"
+    blueprint="$(get_config_value 'blueprint')"
+    use_defaults="$(get_config_value 'use_defaults')"
+    version="$(get_config_value 'version')"
+    domain="$(get_config_value 'domain')"
+    multisite="$(get_config_value 'multisite')"
+    ms_type="$(get_config_value 'ms-type')"
+    db_import="$(get_config_value 'database')"
+    remove_defaults="$(get_config_value 'remove-defaults')"
+    placeholder_content="$(get_config_value 'sample-content')"
+    wp_debug="$(get_config_value 'debug')"
+    image_proxy="$(get_config_value 'images')"
+    git_repo="$(get_config_value 'git_repo')"
+    git_init="$(get_config_value 'git-init')"
+    gitignore="$(get_config_value 'gitignore')"
+    username="$(get_config_value 'username')"
+    password="$(get_config_value 'password')"
+    email="$(get_config_value 'email')"
+    wpskeleton="$(get_config_value 'wpskeleton')"
+    db_name_prefix="$(get_config_value 'dbname-prefix')"
+    db_prefix="$(get_config_value 'db-prefix')"
+    if [[ $db_prefix = 'random' ]]; then
+        #db_prefix_length="$(get_config_value 'db-prefix-length')" #not working, gets confused with two options with same start: db-prefix
+		db_prefix="$(random_string)"
+	fi
 }
 
 get_default_config_value() {

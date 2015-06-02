@@ -296,7 +296,7 @@ check_for_config_file() {
 	test -f ~/.vv-config && got_config="true"
 
 	if [ ! -z $got_config ]; then
-		load_config_path_value
+		path="$( get_config_value 'path' )"
 	else
 		if [[ ! $showing_help = "true" ]]; then
 			info "	"
@@ -323,12 +323,6 @@ info "	"
 
 getJsonVal () {
     python -c "import json,sys;sys.stdout.write(json.dumps(json.load(sys.stdin)$1))";
-}
-
-load_config_path_value() {
-	#Load path from config file
-	path="$( getJsonVal "['path']" < ~/.vv-config )"
-	path="$(echo "$path" | sed -e 's/^"//'  -e 's/"$//')"
 }
 
 load_config_autopdate_config_values() {

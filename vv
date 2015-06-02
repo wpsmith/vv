@@ -346,8 +346,8 @@ load_default_values() {
 }
 
 get_config_value() {
-    value="$( getJsonVal "$defaults" $1 )"
-	value="$(echo "$value" | sed -e 's/^"//'  -e 's/"$//')"
+    value="$( getJsonVal "['$1']" < ~/.vv-config )"
+	value="$( echo "$value" | sed -e 's/^"//'  -e 's/"$//' )"
     echo "$value"
 }
 
@@ -1360,6 +1360,7 @@ main() {
 	no_wp="false"
 	no_wp_with_db="false"
 	sites_folder="www"
+	load_defaults
 	check_args "$@"
 
 }

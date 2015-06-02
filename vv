@@ -738,8 +738,8 @@ create_site_files(){
 	wp_debug_text=''
 	if [[ $wp_debug = 'y' ]]; then
 		wp_debug_text=" --extra-php <<PHP
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
+define('WP_DEBUG', TRUE);
+define('WP_DEBUG_LOG', TRUE);
 PHP"
 	fi
 
